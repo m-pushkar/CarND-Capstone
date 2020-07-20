@@ -113,24 +113,24 @@ class TLClassifier(object):
         return boxes, scores, classes, num
 
 
-    def load_graph (graph_file):
-        graph = tf.Graph()
-        with graph.as_default():
-            od_graph_def = tf.GraphDef()
-            with tf.gfile.GFile(graph_file, 'rb') as fid:
-                serialized_graph = fid.read()
-                od_graph_def.ParseFromString(serialized_graph)
-                tf.import_graph_def(od_graph_def, name='prefix')
-        return graph
+def load_graph (graph_file):
+    graph = tf.Graph()
+    with graph.as_default():
+        od_graph_def = tf.GraphDef()
+        with tf.gfile.GFile(graph_file, 'rb') as fid:
+            serialized_graph = fid.read()
+            od_graph_def.ParseFromString(serialized_graph)
+            tf.import_graph_def(od_graph_def, name='prefix')
+    return graph
 
 
-    def get_final_results(score_thresh, scores, classes):
-        indexes = []
-        for j in range(len(classes)):          ## i = j
-            if scores[j] >= score_thresh:
-                indexes.append(j)
+def get_final_results(score_thresh, scores, classes):
+    indexes = []
+    for j in range(len(classes)):          ## i = j
+        if scores[j] >= score_thresh:
+            indexes.append(j)
 
 
-        final_scores = scores[indexes, ...]
-        final_classes = classes[indexes, ...]
-        return final_scores, final_classes
+    final_scores = scores[indexes, ...]
+    final_classes = classes[indexes, ...]
+    return final_scores, final_classes
