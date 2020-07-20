@@ -13,7 +13,7 @@ You can use this file to test your DBW code against a bag recorded with a refere
 The bag can be found at https://s3-us-west-1.amazonaws.com/udacity-selfdrivingcar/files/reference.bag.zip
 
 To use the downloaded bag file, rename it to 'dbw_test.rosbag.bag' and place it in the CarND-Capstone/data folder.
-Then with roscore running, you can then use roslaunch with the dbw_test.launch file found in 
+Then with roscore running, you can then use roslaunch with the dbw_test.launch file found in
 <project_repo>/ros/src/twist_controller/launch.
 
 This file will produce 3 csv files which you can process to figure out how your DBW node is
@@ -78,7 +78,7 @@ class DBWTestNode(object):
         self.dbw_enabled = msg.data
 
     def steer_cb(self, msg):
-        self.steer = msg.steering_wheel_angle_cmd
+        self.steer = msg.steering_wheel_cmd             ## angle removed
 
     def throttle_cb(self, msg):
         self.throttle = msg.pedal_cmd
