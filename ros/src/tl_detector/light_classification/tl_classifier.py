@@ -12,7 +12,7 @@ IS_DEBUG = True
 
 class TLClassifier(object):
     # Check image source - Simulator or real world
-    def __init__(self, real_world = False):                ## is_real_world = real_world
+    def __init__(self, real_world = False):
         #TODO load classifier
         self.__model_loaded = False
         self.session = None
@@ -46,7 +46,7 @@ class TLClassifier(object):
         rospy.loginfo("Loaded model successfully ")
 
 
-    def get_classification(self, image, score_thresh=0.5):         ## min_score = score_thresh
+    def get_classification(self, image, score_thresh=0.5):
         """Determines the color of the traffic light in the image
 
         Args:
@@ -60,7 +60,7 @@ class TLClassifier(object):
         if not self.__model_loaded:
             return TrafficLight.UNKNOWN
 
-        tl_type = ["RED", "YELLOW", "GREEN"]                       ## tfl = tl
+        tl_type = ["RED", "YELLOW", "GREEN"]
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         image_np = np.expand_dims(np.asarray(image, dtype=np.uint8), 0)
         boxes, scores, classes, num = self.computation(image_np)
@@ -70,7 +70,7 @@ class TLClassifier(object):
         scores = np.squeeze(scores)
         classes = np.squeeze(classes).astype(np.int32)
 
-        for i, box in enumerate(boxes):                            ## j = i
+        for i, box in enumerate(boxes):
             width = (box[3] - box[1]) * image.shape[1]
             height = (box[2] - box[0]) * image.shape[0]
 
@@ -93,7 +93,7 @@ class TLClassifier(object):
                     rospy.loginfo("Predicted TL color is " + tl_type[final_classes[0] - 1] + " and score is " + str(final_scores[0]))
                 return final_classes[0] - 1
 
-    def computation(self, image_np):                    ## do_computation = computation
+    def computation(self, image_np):
         # Placeholders
         image_tensor = self.tf_graph.get_tensor_by_name('prefix/image_tensor:0')
 
@@ -126,7 +126,7 @@ def load_graph (graph_file):
 
 def get_final_results(score_thresh, scores, classes):
     indexes = []
-    for j in range(len(classes)):          ## i = j
+    for j in range(len(classes)):          
         if scores[j] >= score_thresh:
             indexes.append(j)
 

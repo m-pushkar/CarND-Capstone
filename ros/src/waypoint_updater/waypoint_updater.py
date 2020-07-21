@@ -31,7 +31,7 @@ WP_BEFORE_TRAFFICLIGHT = 2
 DECEL_RATE = 1
 SIG_VEL = 9                    # Sigmoid velocity factor
 SIG_EXP = -0.43                # Sigmoid exponent
-SIG_XOFFSET = -3.72            # X-axis offset                          ## SIG_OFFSET = SIG_XOFFSET
+SIG_XOFFSET = -3.72            # X-axis offset
 SIG_YOFFSET = -1.512           # Y-axis offset
 
 
@@ -82,8 +82,8 @@ class WaypointUpdater(object):
         closest_idx = self.waypoints_tree.query([x,y], 1)[1]
 
         # Check position of waypoint
-        closest_coordinates = self.waypoints_2d[closest_idx]      ## closest_coord = closest_coordinates
-        prev_coordinates = self.waypoints_2d[closest_idx-1]       ## prev_coord = prev_coordinates
+        closest_coordinates = self.waypoints_2d[closest_idx]
+        prev_coordinates = self.waypoints_2d[closest_idx-1]       
 
         # Hyper plane through closest_coordinates
         cl_vect = np.array(closest_coordinates)
